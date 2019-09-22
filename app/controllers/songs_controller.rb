@@ -1,4 +1,6 @@
 class SongsController < ApplicationController
+
+
   def index
     @song = Song.order("RANDOM()").first
   end
@@ -8,9 +10,14 @@ class SongsController < ApplicationController
   end
 
   def create
-    Song.create(song_params)
+    @song = Song.create(song_params)
+    if @song.invalid?
+      flash[:error] = '<strong>Could not save</strong> you must enter a song.'
+    end
     redirect_to root_path
   end
+
+
 
   private
 

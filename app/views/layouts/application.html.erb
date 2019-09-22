@@ -10,32 +10,77 @@
   </head>
 
   <body>
-
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">Songs</a>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-        <ul class="navbar-nav mr-auto mt-2 mt-md-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <header class="row">
+      <div class="col-3">
+        <%= link_to root_path, class: 'logo' do %>
+          <div class="circle">
+            <br />
+            MUSIC
+            <br />
+            IS IN
+            <br />
+            US ALL
+          </div>
+        <% end %>
       </div>
-    </nav>
+      <div class="col-4 slogan">
+        When words fail, music speaks 
+      </div>
+      <div class="col-5 links">
+        <%= link_to 'Contribute', '#', data: {toggle: 'modal', target: '#myModal'} %>
+      </div>
+    </header>
 
-    <%= yield %>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">Contribute Your Song</h4>
+          </div>
+          <%= simple_form_for Song.new do |f| %>
+            <div class="modal-body">
+              <%= f.input :song %>
+              <%= f.input :artist %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <%= f.submit 'Create', class: 'btn btn-danger' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <hr />
+
+    <br class="clear" />
+
+    <div class="container">
+       <% if flash[:error].present? %>
+        <div class="col-10 offset-1 alert alert-danger">
+          <%= flash[:error].html_safe %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <div class ="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-6">
+            <%= link_to "Give me another song.", root_path, class: 'next-song' %>
+          </div>
+          <div class="col-12 col-sm-6 footer-blurb">
+            Coded and presented by <a href="https://austindodd.netlify.com"  target="_blank"> Austin Dodd </a> 
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
