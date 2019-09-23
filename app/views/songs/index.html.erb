@@ -1,5 +1,29 @@
 
-<h1><%= @song.song %></h1>
-<h2>- <%= @song.artist %></h2>
 
+
+<div class="booyah-box">
+  
+<table class="table table-hover table-striped table-bordered ">
+  <thead>
+  <tr class="table-primary">
+    <th scope="col">Songs</th>
+    <th scope="col">Artist</th>
+  </tr>
+  </thead>
+  <tbody>
+
+<% @songs.each do |song|%>
+  <tr class="table-active">
+    <td>
+      <%= song.song %>
+    </td>
+    <td>
+       <%= song.artist %>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+</div>
 

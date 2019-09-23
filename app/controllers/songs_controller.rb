@@ -2,7 +2,7 @@ class SongsController < ApplicationController
 
 
   def index
-    @song = Song.order("RANDOM()").first
+    @songs = Song.all
   end
 
   def new
